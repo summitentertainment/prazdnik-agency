@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная №9 - Список задач</title>
+    <meta name="description" content="Праздничное агентство ПраздникPRO - организация праздников под ключ">
+    <meta name="keywords" content="праздничное агентство, организация праздников, свадьба, день рождения">
+    <meta name="author" content="ПраздникPRO">
+    <title>ПраздникPRO - Организация праздников</title>
     <style>
         * {
             margin: 0;
@@ -13,61 +16,210 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            background-color: #fff0f5;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Тёмная тема */
+        body.dark-theme {
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        body.dark-theme .container {
+            background-color: #0f3460;
+        }
+        
+        body.dark-theme .card,
+        body.dark-theme .form-card,
+        body.dark-theme .task-card,
+        body.dark-theme .users-card,
+        body.dark-theme .notes-card {
+            background-color: #16213e;
+        }
+        
+        body.dark-theme button {
+            background-color: #e94560;
+        }
+        
+        body.dark-theme input,
+        body.dark-theme select {
+            background-color: #1a1a2e;
+            color: white;
+            border-color: #e94560;
+        }
+        
+        body.dark-theme .service-item {
+            background-color: #1a1a2e;
+            border-bottom: 1px solid #e94560;
         }
         
         .container {
-            max-width: 500px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
             background: white;
-            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* ШАПКА */
+        header {
+            background-color: #2c3e50;
+            color: #f1c40f;
             padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 10px;
+            border-bottom: 5px solid #f39c12;
         }
         
-        h2 {
+        header h1 {
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            color: #ecf0f1;
+        }
+        
+        /* МЕНЮ */
+        nav {
+            background-color: #34495e;
+            padding: 15px 0;
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 16px;
-            font-weight: normal;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .input-group {
-            display: flex;
-            gap: 10px;
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 5px;
+            display: inline-block;
+            font-weight: bold;
+            transition: 0.3s;
+            border-radius: 25px;
+        }
+        
+        nav a:hover {
+            background-color: #f39c12;
+            color: #2c3e50;
+        }
+        
+        /* БАННЕР */
+        .hero {
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .hero .btn {
+            background-color: #2c3e50;
+            color: #f1c40f;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 15px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .hero .btn:hover {
+            background-color: #1a252f;
+            transform: scale(1.05);
+        }
+        
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .main-content {
+            padding: 40px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card, .form-card, .task-card, .users-card, .notes-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #f39c12;
+            transition: 0.3s;
+        }
+        
+        .card h3, .form-card h3, .task-card h3, .users-card h3, .notes-card h3 {
+            color: #2c3e50;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f39c12;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
+        body.dark-theme .card h3,
+        body.dark-theme .form-card h3,
+        body.dark-theme .task-card h3,
+        body.dark-theme .users-card h3,
+        body.dark-theme .notes-card h3 {
+            color: #f39c12;
         }
         
-        input:focus {
-            outline: none;
-            border-color: #667eea;
+        /* Блок УСЛУГИ */
+        .services-list {
+            list-style: none;
+            padding: 0;
         }
         
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        
+        .service-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .service-price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        body.dark-theme .service-name {
+            color: #f39c12;
+        }
+        
+        body.dark-theme .service-item {
+            border-bottom: 1px solid #e94560;
+        }
+        
+        /* КНОПКИ */
         button {
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #2c3e50;
             color: white;
             border: none;
+            padding: 10px 20px;
+            margin: 5px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
@@ -75,60 +227,317 @@
         }
         
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+            background-color: #f39c12;
+            transform: scale(1.02);
         }
         
-        ul {
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .add-btn {
+            background-color: #27ae60;
+        }
+        
+        .add-btn:hover {
+            background-color: #229954;
+        }
+        
+        /* ПОЛЯ ВВОДА */
+        input {
+            padding: 10px 12px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 20px);
+        }
+        
+        /* ОШИБКИ И УСПЕХ */
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        /* СПИСКИ */
+        .users-list, .tasks-list, .notes-list {
             list-style: none;
             padding: 0;
         }
         
-        li {
-            background: #f8f9fa;
+        .user-item, .task-item, .note-item {
+            background: #e9ecef;
             margin: 10px 0;
             padding: 12px 15px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid #667eea;
         }
         
-        .task-text {
+        body.dark-theme .user-item,
+        body.dark-theme .task-item,
+        body.dark-theme .note-item {
+            background-color: #1a1a2e;
+            border: 1px solid #e94560;
+        }
+        
+        .task-text, .note-text {
             flex: 1;
-            font-size: 16px;
         }
         
-        .delete-btn {
-            background: #e74c3c;
-            padding: 6px 15px;
-            font-size: 12px;
-        }
-        
-        .delete-btn:hover {
-            background: #c0392b;
-            transform: none;
-        }
-        
-        .empty-message {
+        /* СЧЁТЧИК */
+        .counter-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e74c3c;
             text-align: center;
-            color: #999;
-            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        /* ТАБЛИЦА ПОРТФОЛИО */
+        .portfolio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .portfolio-table th, .portfolio-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .portfolio-table th {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        body.dark-theme .portfolio-table th {
+            background-color: #e94560;
+        }
+        
+        body.dark-theme .portfolio-table td {
+            border-color: #e94560;
+        }
+        
+        /* ПОДВАЛ */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+        
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            nav a {
+                padding: 8px 15px;
+                margin: 0 2px;
+                font-size: 12px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .service-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Лабораторная работа №9</h1>
-        <h2>Динамическое создание и удаление элементов</h2>
+        <!-- ШАПКА -->
+        <header>
+            <h1>🎉 ПраздникPRO 🎈</h1>
+            <p>Ваш праздник — наша забота! Организация под ключ с 2010 года</p>
+        </header>
         
-        <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Введите задачу...">
-            <button id="addTaskBtn">Добавить</button>
+        <!-- МЕНЮ -->
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#services">Услуги</a>
+            <a href="#clients">Клиенты</a>
+            <a href="#tasks">Задачи</a>
+            <a href="#notes">Заметки</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        
+        <!-- БАННЕР -->
+        <div class="hero">
+            <h2>Сделайте ваш праздник незабываемым!</h2>
+            <p>Лучшие ведущие, шоу-программы, оформление шарами и фейерверки.</p>
+            <button class="btn" id="calculatorBtn">🎁 Рассчитать бюджет</button>
         </div>
         
-        <ul id="taskList"></ul>
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <div class="main-content">
+            <!-- РЯД 1 -->
+            <div class="grid">
+                <!-- Блок УСЛУГИ -->
+                <div class="card" id="services">
+                    <h3>🎈 Наши услуги</h3>
+                    <ul class="services-list">
+                        <li class="service-item">
+                            <span class="service-name">Детские праздники</span>
+                            <span class="service-price">от 15 000 ₽</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Свадьбы</span>
+                            <span class="service-price">от 80 000 ₽</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Корпоративы</span>
+                            <span class="service-price">от 50 000 ₽</span>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Дни рождения</span>
+                            <span class="service-price">от 25 000 ₽</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Блок СЧЁТЧИК КЛИКОВ -->
+                <div class="card">
+                    <h3>❤️ Нас выбирают</h3>
+                    <div class="counter-value" id="counterValue">0</div>
+                    <p style="text-align:center">счастливых клиентов</p>
+                    <div style="text-align:center">
+                        <button id="incrementBtn">+1</button>
+                        <button id="resetBtn">Сброс</button>
+                    </div>
+                </div>
+                
+                <!-- Блок НАСТРОЙКИ -->
+                <div class="card">
+                    <h3>⚙️ Настройки отображения</h3>
+                    <button id="changeColorBtn">🎨 Сменить цвет фона</button>
+                    <button id="themeToggleBtn">🌙 Тёмная тема</button>
+                    <button id="changeTitleBtn">✏️ Изменить приветствие</button>
+                    <button id="hideBtn">👁️ Скрыть блок</button>
+                    <button id="showBtn">👁️ Показать блок</button>
+                    <div id="myBlock" style="margin-top:15px; padding:10px; background:#e9ecef; border-radius:8px">
+                        📢 Спецпредложение: Скидка 10% на свадебный пакет!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- РЯД 2 -->
+            <div class="grid">
+                <!-- Блок РЕГИСТРАЦИЯ -->
+                <div class="form-card">
+                    <h3>📝 Заявка на консультацию</h3>
+                    <form id="registrationForm">
+                        <input type="text" id="regName" placeholder="Ваше имя (мин. 3 символа)">
+                        <div class="error" id="nameError"></div>
+                        <input type="email" id="regEmail" placeholder="Email (должен содержать @)">
+                        <div class="error" id="emailError"></div>
+                        <input type="password" id="regPassword" placeholder="Пароль (мин. 6 символов)">
+                        <div class="error" id="passwordError"></div>
+                        <button type="submit">Отправить заявку</button>
+                    </form>
+                    <div id="regSuccessMessage"></div>
+                </div>
+                
+                <!-- Блок ПОЛЬЗОВАТЕЛИ -->
+                <div class="users-card" id="clients">
+                    <h3>👥 Наши клиенты</h3>
+                    <ul class="users-list" id="userList"></ul>
+                    <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:15px">
+                        <input type="text" id="newName" placeholder="Имя" style="width:30%">
+                        <input type="number" id="newAge" placeholder="Возраст" style="width:25%">
+                        <input type="text" id="newCity" placeholder="Город" style="width:30%">
+                        <button id="addUserBtn" style="width:auto">➕ Добавить</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- РЯД 3 -->
+            <div class="grid">
+                <!-- Блок ЗАДАЧИ -->
+                <div class="task-card" id="tasks">
+                    <h3>✅ План мероприятий</h3>
+                    <div style="display:flex; gap:10px; margin-bottom:15px">
+                        <input type="text" id="taskInput" placeholder="Новая задача..." style="flex:1">
+                        <button id="addTaskBtn">Добавить</button>
+                    </div>
+                    <ul class="tasks-list" id="taskList"></ul>
+                </div>
+                
+                <!-- Блок ПОРТФОЛИО -->
+                <div class="card">
+                    <h3>📸 Наши работы</h3>
+                    <table class="portfolio-table">
+                        <thead>
+                            <tr><th>Мероприятие</th><th>Дата</th><th>Гости</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Свадьба Алексея и Марины</td><td>15.06.2024</td><td>80 чел.</td></tr>
+                            <tr><td>Детский праздник "В поисках сокровищ"</td><td>02.12.2024</td><td>25 чел.</td></tr>
+                            <tr><td>Корпоратив "IT-Компания 2024"</td><td>28.01.2025</td><td>120 чел.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- РЯД 4 - МЕНЕДЖЕР ЗАМЕТОК (ИТОГОВОЕ ЗАДАНИЕ) -->
+            <div class="grid">
+                <div class="notes-card" id="notes">
+                    <h3>📝 Менеджер заметок</h3>
+                    <div style="display:flex; gap:10px; margin-bottom:10px">
+                        <input type="text" id="noteInput" placeholder="Введите заметку (мин. 3 символа)" style="flex:1">
+                        <button id="addNoteBtn" class="add-btn">➕ Добавить</button>
+                    </div>
+                    <div class="error" id="noteError"></div>
+                    <ul class="notes-list" id="noteList"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ПОДВАЛ -->
+        <footer id="contacts">
+            <p>© 2025 Праздничное агентство «ПраздникPRO» | Все права защищены</p>
+            <p>📍 Москва, ул. Праздничная, 10 | ☎ +7 (495) 123-45-67 | ✉ <a href="mailto:info@prazdnikpro.ru">info@prazdnikpro.ru</a></p>
+            <p>
+                <a href="#">Главная</a> | 
+                <a href="#services">Услуги</a> | 
+                <a href="#clients">Клиенты</a> | 
+                <a href="#tasks">Задачи</a> |
+                <a href="#notes">Заметки</a>
+            </p>
+        </footer>
     </div>
     
     <script src="script.js"></script>
