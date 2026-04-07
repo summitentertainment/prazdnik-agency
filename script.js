@@ -1,89 +1,114 @@
 // ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №8
-// Массивы и объекты в JavaScript
+// ЛАБОРАТОРНАЯ РАБОТА №9
+// Динамическое создание и удаление элементов
 // ============================================
 
 console.log("=========================================");
-console.log("Лабораторная работа №8");
-console.log("Массивы и объекты");
+console.log("Лабораторная работа №9");
+console.log("Динамическое создание и удаление элементов");
 console.log("=========================================");
 
-// ========== ЗАДАНИЕ 1 ==========
-let numbers = [10, 20, 30, 40, 50];
-console.log("Задание 1 - Массив чисел:", numbers);
+// Получаем элементы со страницы
+let taskInput = document.getElementById("taskInput");
+let addTaskBtn = document.getElementById("addTaskBtn");
+let taskList = document.getElementById("taskList");
 
-// ========== ЗАДАНИЕ 2 ==========
-numbers.push(60);
-console.log("Задание 2 - Массив после добавления:", numbers);
-
-// ========== ЗАДАНИЕ 3 ==========
-console.log("Задание 3 - Перебор массива:");
-for (let i = 0; i < numbers.length; i++) {
-    console.log("  Элемент " + i + ":", numbers[i]);
+// ========== ЗАДАНИЯ 1, 3: Создание элемента с кнопкой удаления ==========
+// Функция для создания нового элемента задачи
+function createTaskItem(taskText) {
+    // Создаём элемент списка
+    let li = document.createElement("li");
+    
+    // Создаём span для текста задачи
+    let span = document.createElement("span");
+    span.textContent = taskText;
+    span.className = "task-text";
+    
+    // Создаём кнопку удаления (задание 3)
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Удалить";
+    deleteBtn.className = "delete-btn";
+    
+    // Задание 4: Удаление элемента при нажатии на кнопку
+    deleteBtn.onclick = function() {
+        li.remove();
+        console.log("Удалена задача:", taskText);
+        
+        // Если список стал пустым, показываем сообщение
+        if (taskList.children.length === 0) {
+            showEmptyMessage();
+        }
+    };
+    
+    // Собираем элемент
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+    
+    return li;
 }
 
-// ========== ЗАДАНИЕ 4 ==========
-let user = {
-    name: "Анна",
-    age: 22,
-    city: "Москва"
-};
-console.log("Задание 4 - Объект пользователь:", user);
-
-// ========== ЗАДАНИЕ 5 ==========
-let users = [
-    { name: "Анна", age: 22, city: "Москва" },
-    { name: "Максим", age: 28, city: "Санкт-Петербург" },
-    { name: "Елена", age: 25, city: "Казань" }
-];
-console.log("Задание 5 - Массив пользователей:", users);
-
-// ========== ЗАДАНИЕ 6 ==========
-function displayUsers() {
-    let userList = document.getElementById("userList");
-    userList.innerHTML = "";
-    
-    for (let i = 0; i < users.length; i++) {
-        userList.innerHTML += "<li>" + users[i].name + ", " + users[i].age + " лет, " + users[i].city + "</li>";
+// Функция для отображения сообщения о пустом списке
+function showEmptyMessage() {
+    if (taskList.children.length === 0) {
+        let emptyLi = document.createElement("li");
+        emptyLi.textContent = "Список задач пуст";
+        emptyLi.style.textAlign = "center";
+        emptyLi.style.color = "#999";
+        emptyLi.style.justifyContent = "center";
+        emptyLi.id = "emptyMessage";
+        taskList.appendChild(emptyLi);
     }
-    
-    console.log("Задание 6 - Список пользователей обновлён");
 }
 
-displayUsers();
+// Функция для удаления сообщения о пустом списке
+function removeEmptyMessage() {
+    let emptyMessage = document.getElementById("emptyMessage");
+    if (emptyMessage) {
+        emptyMessage.remove();
+    }
+}
 
-// ========== ЗАДАНИЕ 7 ==========
-let addUserBtn = document.getElementById("addUserBtn");
+// Показываем начальное сообщение, если список пуст
+showEmptyMessage();
 
-addUserBtn.onclick = function() {
-    let newName = document.getElementById("newName").value;
-    let newAge = document.getElementById("newAge").value;
-    let newCity = document.getElementById("newCity").value;
+// ========== ЗАДАНИЕ 2: Добавление задачи при нажатии кнопки ==========
+addTaskBtn.onclick = function() {
+    // Задание 5: Запрет добавления пустых значений
+    let taskText = taskInput.value.trim();
     
-    if (newName === "" || newAge === "" || newCity === "") {
-        alert("Заполните все поля!");
-        console.log("Задание 7 - Ошибка: не все поля заполнены");
+    if (taskText === "") {
+        alert("Введите задачу!");
+        console.log("Ошибка: попытка добавить пустую задачу");
         return;
     }
     
-    let newUser = {
-        name: newName,
-        age: Number(newAge),
-        city: newCity
-    };
+    // Удаляем сообщение о пустом списке, если оно есть
+    removeEmptyMessage();
     
-    users.push(newUser);
-    console.log("Задание 7 - Добавлен пользователь:", newUser);
+    // Создаём новую задачу
+    let newTask = createTaskItem(taskText);
     
-    displayUsers();
+    // Добавляем в список
+    taskList.appendChild(newTask);
     
-    document.getElementById("newName").value = "";
-    document.getElementById("newAge").value = "";
-    document.getElementById("newCity").value = "";
+    console.log("Добавлена задача:", taskText);
     
-    alert("Пользователь добавлен!");
+    // Очищаем поле ввода
+    taskInput.value = "";
 };
 
+// Добавление задачи по нажатию клавиши Enter
+taskInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        addTaskBtn.click();
+    }
+});
+
 console.log("=========================================");
-console.log("Все задания выполнены");
+console.log("✅ Все задания выполнены!");
+console.log("📌 Функционал:");
+console.log("   - Добавление задачи в список");
+console.log("   - Удаление задачи кнопкой");
+console.log("   - Защита от пустых значений");
+console.log("   - Добавление по Enter");
 console.log("=========================================");
