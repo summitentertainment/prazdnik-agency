@@ -1,71 +1,89 @@
 // ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №7
-// Работа с формами и валидация данных
+// ЛАБОРАТОРНАЯ РАБОТА №8
+// Массивы и объекты в JavaScript
 // ============================================
 
-let form = document.getElementById("registrationForm");
-let successMessage = document.getElementById("successMessage");
+console.log("=========================================");
+console.log("Лабораторная работа №8");
+console.log("Массивы и объекты");
+console.log("=========================================");
 
-form.addEventListener("submit", function(event) {
-    // Задание 2: Отменяем стандартную отправку формы
-    event.preventDefault();
+// ========== ЗАДАНИЕ 1 ==========
+let numbers = [10, 20, 30, 40, 50];
+console.log("Задание 1 - Массив чисел:", numbers);
+
+// ========== ЗАДАНИЕ 2 ==========
+numbers.push(60);
+console.log("Задание 2 - Массив после добавления:", numbers);
+
+// ========== ЗАДАНИЕ 3 ==========
+console.log("Задание 3 - Перебор массива:");
+for (let i = 0; i < numbers.length; i++) {
+    console.log("  Элемент " + i + ":", numbers[i]);
+}
+
+// ========== ЗАДАНИЕ 4 ==========
+let user = {
+    name: "Анна",
+    age: 22,
+    city: "Москва"
+};
+console.log("Задание 4 - Объект пользователь:", user);
+
+// ========== ЗАДАНИЕ 5 ==========
+let users = [
+    { name: "Анна", age: 22, city: "Москва" },
+    { name: "Максим", age: 28, city: "Санкт-Петербург" },
+    { name: "Елена", age: 25, city: "Казань" }
+];
+console.log("Задание 5 - Массив пользователей:", users);
+
+// ========== ЗАДАНИЕ 6 ==========
+function displayUsers() {
+    let userList = document.getElementById("userList");
+    userList.innerHTML = "";
     
-    // Задание 2: Получаем значения всех полей
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    
-    // Убираем лишние пробелы
-    name = name.trim();
-    email = email.trim();
-    password = password.trim();
-    
-    // Получаем элементы для вывода ошибок
-    let nameError = document.getElementById("nameError");
-    let emailError = document.getElementById("emailError");
-    let passwordError = document.getElementById("passwordError");
-    
-    // Очищаем старые сообщения об ошибках
-    nameError.textContent = "";
-    emailError.textContent = "";
-    passwordError.textContent = "";
-    successMessage.textContent = "";
-    
-    let isValid = true;
-    
-    // Задание 3 и 4: Проверка имени (не менее 3 символов)
-    if (name === "") {
-        nameError.textContent = "Имя обязательно для заполнения";
-        isValid = false;
-    } else if (name.length < 3) {
-        nameError.textContent = "Имя должно содержать не менее 3 символов";
-        isValid = false;
+    for (let i = 0; i < users.length; i++) {
+        userList.innerHTML += "<li>" + users[i].name + ", " + users[i].age + " лет, " + users[i].city + "</li>";
     }
     
-    // Задание 3 и 4: Проверка email (содержит @)
-    if (email === "") {
-        emailError.textContent = "Email обязателен для заполнения";
-        isValid = false;
-    } else if (!email.includes("@")) {
-        emailError.textContent = "Введите корректный email (с символом @)";
-        isValid = false;
+    console.log("Задание 6 - Список пользователей обновлён");
+}
+
+displayUsers();
+
+// ========== ЗАДАНИЕ 7 ==========
+let addUserBtn = document.getElementById("addUserBtn");
+
+addUserBtn.onclick = function() {
+    let newName = document.getElementById("newName").value;
+    let newAge = document.getElementById("newAge").value;
+    let newCity = document.getElementById("newCity").value;
+    
+    if (newName === "" || newAge === "" || newCity === "") {
+        alert("Заполните все поля!");
+        console.log("Задание 7 - Ошибка: не все поля заполнены");
+        return;
     }
     
-    // Задание 3 и 4: Проверка пароля (не менее 6 символов)
-    if (password === "") {
-        passwordError.textContent = "Пароль обязателен для заполнения";
-        isValid = false;
-    } else if (password.length < 6) {
-        passwordError.textContent = "Пароль должен содержать не менее 6 символов";
-        isValid = false;
-    }
+    let newUser = {
+        name: newName,
+        age: Number(newAge),
+        city: newCity
+    };
     
-    // Задание 5 и 6: Если все данные корректны
-    if (isValid) {
-        successMessage.textContent = "Регистрация успешна!";
-        successMessage.className = "success";
-        
-        // Задание 6: Очищаем форму после успешной проверки
-        form.reset();
-    }
-});
+    users.push(newUser);
+    console.log("Задание 7 - Добавлен пользователь:", newUser);
+    
+    displayUsers();
+    
+    document.getElementById("newName").value = "";
+    document.getElementById("newAge").value = "";
+    document.getElementById("newCity").value = "";
+    
+    alert("Пользователь добавлен!");
+};
+
+console.log("=========================================");
+console.log("Все задания выполнены");
+console.log("=========================================");

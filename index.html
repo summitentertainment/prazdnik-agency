@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная №7 - Формы и валидация</title>
+    <title>Лабораторная №8 - Массивы и объекты</title>
     <style>
         * {
             margin: 0;
@@ -15,18 +15,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            padding: 40px;
         }
         
         .container {
+            max-width: 600px;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
+            padding: 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
@@ -34,7 +31,6 @@
             text-align: center;
             color: #333;
             margin-bottom: 10px;
-            font-size: 24px;
         }
         
         h2 {
@@ -45,30 +41,37 @@
             font-weight: normal;
         }
         
-        .form-group {
-            margin-bottom: 20px;
+        .section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
         }
         
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: 500;
+        .section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            background: #e9ecef;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
         }
         
         input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
+            margin: 8px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 5px rgba(102,126,234,0.3);
         }
         
         button {
@@ -78,9 +81,9 @@
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
             cursor: pointer;
-            transition: 0.3s;
+            margin-top: 10px;
+            font-size: 16px;
         }
         
         button:hover {
@@ -88,50 +91,30 @@
             box-shadow: 0 5px 15px rgba(102,126,234,0.4);
         }
         
-        .error {
-            color: #e74c3c;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-        
-        .success {
-            background: #d4edda;
-            color: #155724;
-            padding: 12px;
-            border-radius: 8px;
+        .add-section {
             margin-top: 20px;
-            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Регистрация</h1>
-        <h2>Лабораторная работа №7</h2>
+        <h1>Лабораторная работа №8</h1>
+        <h2>Массивы и объекты в JavaScript</h2>
         
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="name">Имя:</label>
-                <input type="text" id="name" placeholder="Введите имя">
-                <div class="error" id="nameError"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="example@mail.ru">
-                <div class="error" id="emailError"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" placeholder="Введите пароль">
-                <div class="error" id="passwordError"></div>
-            </div>
-            
-            <button type="submit">Зарегистрироваться</button>
-        </form>
+        <div class="section">
+            <h3>Список пользователей</h3>
+            <ul id="userList"></ul>
+        </div>
         
-        <div id="successMessage"></div>
+        <div class="add-section">
+            <h3>Добавить пользователя</h3>
+            <input type="text" id="newName" placeholder="Имя">
+            <input type="number" id="newAge" placeholder="Возраст">
+            <input type="text" id="newCity" placeholder="Город">
+            <button id="addUserBtn">Добавить пользователя</button>
+        </div>
     </div>
     
     <script src="script.js"></script>
