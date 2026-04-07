@@ -1,105 +1,102 @@
 // ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №4
-// JavaScript для сайта праздничного агентства
+// ЛАБОРАТОРНАЯ РАБОТА №5
+// События и обработчики событий в JavaScript
 // ============================================
 
 console.log("=========================================");
-console.log("Лабораторная работа №4");
-console.log("Сайт праздничного агентства «ПраздникPRO»");
+console.log("Лабораторная работа №5");
+console.log("События и обработчики событий");
 console.log("=========================================");
 
-// ========== ЗАДАНИЕ 2 ==========
-// Создать переменную с именем пользователя и вывести её в консоль
+// ========== ЗАДАНИЯ 1-2 ==========
+// Кнопка «Нажми меня» с выводом alert
 
-let userName = "Анна";
-console.log("Задание 2 - Имя пользователя:", userName);
-console.log("Тип данных:", typeof userName);
+let alertButton = document.getElementById("alertBtn");
+if (alertButton) {
+    alertButton.onclick = function() {
+        alert("Привет! Вы нажали на кнопку!");
+        console.log("Задания 1-2: Нажата кнопка с alert");
+    };
+}
 
 // ========== ЗАДАНИЕ 3 ==========
-// Создать две числовые переменные и вывести их сумму
+// Изменение текста заголовка h1
 
-let num1 = 15;
-let num2 = 28;
-let sum = num1 + num2;
-console.log("Задание 3 - Числовые переменные:", num1, "и", num2);
-console.log("Их сумма:", sum);
-console.log("Тип данных num1:", typeof num1);
+let title = document.getElementById("mainTitle");
+let changeTextBtn = document.getElementById("changeTextBtn");
+
+if (changeTextBtn && title) {
+    changeTextBtn.onclick = function() {
+        title.textContent = "Новый заголовок! Текст изменён!";
+        console.log("Задание 3: Заголовок изменён на:", title.textContent);
+    };
+}
 
 // ========== ЗАДАНИЕ 4 ==========
-// Создать функцию приветствия, которая принимает имя и выводит сообщение в консоль
+// Изменение цвета фона страницы
 
-function greetUser(name) {
-    console.log("Задание 4 - Приветствие: Привет, " + name + "! Добро пожаловать на сайт праздничного агентства!");
+let changeColorBtn = document.getElementById("changeColorBtn");
+
+if (changeColorBtn) {
+    changeColorBtn.onclick = function() {
+        let colors = ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4", "#ffeaa7", "#dfe6e9", "#e74c3c", "#3498db"];
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = randomColor;
+        console.log("Задание 4: Цвет фона изменён на", randomColor);
+    };
 }
-
-// Вызов функции
-greetUser(userName);
-greetUser("Максим");
 
 // ========== ЗАДАНИЕ 5 ==========
-// Создать функцию, которая принимает число и возвращает его квадрат
+// Счётчик кликов
 
-function squareNumber(num) {
-    return num * num;
+let count = 0;
+let counterValue = document.getElementById("counterValue");
+let incrementBtn = document.getElementById("incrementBtn");
+let resetBtn = document.getElementById("resetBtn");
+
+if (incrementBtn && resetBtn && counterValue) {
+    incrementBtn.onclick = function() {
+        count++;
+        counterValue.textContent = count;
+        console.log("Задание 5: Счётчик =", count);
+    };
+    
+    resetBtn.onclick = function() {
+        count = 0;
+        counterValue.textContent = count;
+        console.log("Задание 5: Счётчик сброшен на 0");
+    };
 }
-
-// Проверка работы функции
-console.log("Задание 5 - Квадрат числа 7 =", squareNumber(7));
-console.log("Квадрат числа 4 =", squareNumber(4));
-console.log("Квадрат числа 10 =", squareNumber(10));
 
 // ========== ЗАДАНИЕ 6 ==========
-// Мини-задание «Калькулятор в консоли»
-// Пользователь вводит два числа через prompt, программа выводит их сумму
+// Форма с отменой отправки и выводом в консоль
 
-function runCalculator() {
-    console.log("\n========== КАЛЬКУЛЯТОР ==========");
-    
-    let input1 = prompt("Введите первое число:");
-    console.log("Пользователь ввел (первое число):", input1);
-    
-    let input2 = prompt("Введите второе число:");
-    console.log("Пользователь ввел (второе число):", input2);
-    
-    let numberA = Number(input1);
-    let numberB = Number(input2);
-    
-    if (isNaN(numberA) || isNaN(numberB)) {
-        console.log("Ошибка: Пожалуйста, введите корректные числа!");
-        alert("Ошибка! Нужно ввести числа.");
-    } else {
-        let result = numberA + numberB;
-        console.log("Результат сложения:", numberA, "+", numberB, "=", result);
-        alert("Результат: " + numberA + " + " + numberB + " = " + result);
-    }
-    
-    console.log("==================================\n");
+let form = document.getElementById("myForm");
+
+if (form) {
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Отменяем стандартную перезагрузку страницы
+        
+        let inputField = document.getElementById("userInput");
+        let userText = inputField.value;
+        
+        if (userText === "") {
+            console.log("Задание 6: Пользователь отправил пустую форму");
+            alert("Пожалуйста, введите текст!");
+        } else {
+            console.log("Задание 6: Введённый текст —", userText);
+            alert("Текст отправлен! Смотрите консоль (F12)");
+            inputField.value = ""; // Очищаем поле
+        }
+    });
 }
 
-// ========== ДОПОЛНИТЕЛЬНО ==========
-// Функция для подписки (демонстрация работы с DOM)
-
-function subscribeUser() {
-    let email = document.getElementById("emailInput").value;
-    if (email === "") {
-        alert("Введите ваш e-mail!");
-    } else {
-        console.log("Подписался пользователь с email:", email);
-        alert("Спасибо за подписку! " + email);
-        document.getElementById("emailInput").value = "";
-    }
-}
-
-// ========== ВЫВОД ТИПОВ ДАННЫХ ==========
-console.log("\n========== ТИПЫ ДАННЫХ ==========");
-let stringVar = "Привет мир";
-let numberVar = 42;
-let booleanVar = true;
-console.log("stringVar =", stringVar, "-> тип:", typeof stringVar);
-console.log("numberVar =", numberVar, "-> тип:", typeof numberVar);
-console.log("booleanVar =", booleanVar, "-> тип:", typeof booleanVar);
 console.log("=========================================");
-
-console.log("\n✅ Сайт праздничного агентства загружен!");
-console.log("📌 Нажмите кнопку «Калькулятор» на сайте, чтобы запустить задание 6");
+console.log("✅ Все обработчики событий загружены!");
+console.log("📌 Попробуйте:");
+console.log("   - Нажать кнопки");
+console.log("   - Изменить заголовок");
+console.log("   - Сменить цвет фона");
+console.log("   - Поработать со счётчиком");
+console.log("   - Отправить форму");
 console.log("=========================================");

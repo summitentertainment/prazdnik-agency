@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Праздничное агентство «ПраздникPRO» - организация дней рождения, свадеб, корпоративов и детских праздников. Лучшие ведущие, шоу-программы и оформление.">
-    <meta name="keywords" content="праздничное агентство, организация праздников, свадьба, день рождения, корпоратив, аниматоры, ведущий">
-    <meta name="author" content="Агентство «ПраздникPRO»">
-    <meta name="robots" content="index, follow">
-    <title>ПраздникPRO - Организация праздников под ключ</title>
-    
+    <title>Лабораторная работа №5 - События JavaScript</title>
     <style>
-        /* Глобальные стили и сброс */
         * {
             margin: 0;
             padding: 0;
@@ -19,392 +13,158 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fff0f5;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.1) 2%, transparent 2.5%);
-            background-size: 30px 30px;
-            color: #333;
-            line-height: 1.6;
+            background-color: #f0f0f0;
+            padding: 40px;
+            transition: background-color 0.3s ease;
         }
         
-        /* Блок-контейнер для всего содержимого */
         .container {
-            width: 1000px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        /* Шапка сайта */
-        header {
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 25px 30px;
-            text-align: center;
-            border-bottom: 5px solid #f39c12;
-        }
-        
-        header h1 {
-            font-size: 2.2em;
-            letter-spacing: 2px;
-        }
-        
-        header p {
-            font-size: 1.1em;
-            color: #ecf0f1;
-        }
-        
-        /* Горизонтальное меню */
-        nav {
-            background-color: #34495e;
-            padding: 12px 0;
-            text-align: center;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            margin: 0 5px;
-            display: inline-block;
-            font-weight: bold;
-            transition: 0.3s;
-            border-radius: 25px;
-        }
-        
-        nav a:hover {
-            background-color: #f39c12;
-            color: #2c3e50;
-            transform: scale(1.05);
-        }
-        
-        /* Баннер */
-        .hero {
-            background: linear-gradient(135deg, #e74c3c, #f39c12);
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-        }
-        
-        .hero h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .hero .btn {
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 40px;
-            display: inline-block;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-        
-        .hero .btn:hover {
-            background-color: #1a252f;
-            transform: scale(1.05);
-        }
-        
-        /* Двухколоночный макет */
-        .main-content {
-            display: flex;
-            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
             padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
-        .left-column {
-            flex: 2;
-        }
-        
-        .right-column {
-            flex: 1;
-            background-color: #fef9e6;
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #f39c12;
-        }
-        
-        /* Стили текста */
-        h2, h3 {
+        h1 {
             color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background-color: #e74c3c;
+            transform: scale(1.02);
+        }
+        
+        .counter {
+            text-align: center;
+        }
+        
+        .counter h3 {
+            font-size: 24px;
             margin-bottom: 15px;
         }
         
-        h2 {
-            border-bottom: 2px solid #f39c12;
-            padding-bottom: 5px;
-        }
-        
-        .price {
-            font-size: 1.2em;
+        .counter span {
             color: #e74c3c;
-            font-weight: bold;
+            font-size: 32px;
         }
         
-        /* Стили для списков */
-        ul, ol {
-            margin: 15px 0 15px 30px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        /* Таблица портфолио */
-        .portfolio-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .portfolio-table th, .portfolio-table td {
+        input {
+            padding: 10px;
+            width: 70%;
             border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        
-        .portfolio-table th {
-            background-color: #f39c12;
-            color: white;
-        }
-        
-        .portfolio-table td img {
-            width: 80px;
-            height: 60px;
-            object-fit: cover;
             border-radius: 8px;
+            margin-right: 10px;
         }
         
-        /* Блок акции */
-        .promo {
-            background-color: #e74c3c;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
+        form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         
-        .promo span {
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        
-        /* Форма подписки */
-        .subscribe input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-        }
-        
-        .subscribe button {
-            background-color: #f39c12;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .subscribe button:hover {
-            background-color: #e67e22;
-        }
-
-        /* Кнопка калькулятора */
-        .calculator-btn {
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            font-size: 1em;
-        }
-        
-        .calculator-btn:hover {
-            background-color: #e74c3c;
-        }
-        
-        /* Подвал */
-        footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 20px;
+        .result-info {
             margin-top: 20px;
-            font-size: 0.9em;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            text-align: center;
+            font-family: monospace;
         }
         
-        footer a {
-            color: #f39c12;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 1020px) {
-            .container {
-                width: 95%;
-                margin: 10px auto;
-            }
-            .main-content {
-                flex-direction: column;
-            }
+        hr {
+            margin: 20px 0;
+            border: none;
+            height: 1px;
+            background: #ddd;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- ШАПКА САЙТА -->
-    <header>
-        <h1>🎉 ПраздникPRO 🎈</h1>
-        <p>Ваш праздник — наша забота! Организация под ключ с 2010 года</p>
-    </header>
-    
-    <!-- НАВИГАЦИОННОЕ МЕНЮ (ССЫЛКИ) -->
-    <nav>
-        <a href="#">Главная</a>
-        <a href="#services">Услуги</a>
-        <a href="#portfolio">Портфолио</a>
-        <a href="#contacts">Контакты</a>
-        <a href="#faq">Вопросы</a>
-    </nav>
-    
-    <!-- БАННЕР -->
-    <div class="hero">
-        <h2>Сделайте ваш праздник незабываемым!</h2>
-        <p>Лучшие ведущие, шоу-программы, оформление шарами и фейерверки.</p>
-        <a href="#" class="btn">Заказать сейчас</a>
-    </div>
-    
-    <!-- ОСНОВНОЙ БЛОК С ДВУМЯ КОЛОНКАМИ -->
-    <div class="main-content">
-        <!-- ЛЕВАЯ КОЛОНКА: основной контент -->
-        <div class="left-column">
-            <h2 id="services">🎈 Наши услуги</h2>
-            <p>Мы предлагаем <b>полный спектр услуг</b> для организации любого торжества. <i>Индивидуальный подход</i> к каждому клиенту — наша главная ценность.</p>
-            
-            <!-- Маркированный список услуг -->
-            <ul>
-                <li><b>Детские праздники</b> — аниматоры, мыльные пузыри, научное шоу. <span class="price">от 15 000 ₽</span></li>
-                <li><b>Свадьбы</b> — выездная регистрация, ведущий, фото/видео. <span class="price">от 80 000 ₽</span></li>
-                <li><b>Корпоративы</b> — тимбилдинг, квесты, ведущие-звезды. <span class="price">от 50 000 ₽</span></li>
-                <li><b>Дни рождения</b> — сценарии на любой возраст, кейтеринг. <span class="price">от 25 000 ₽</span></li>
-            </ul>
-            
-            <!-- Нумерованный список этапов работы -->
-            <h3>Как мы работаем:</h3>
-            <ol>
-                <li>Вы оставляете заявку на сайте.</li>
-                <li>Мы проводим бесплатную консультацию.</li>
-                <li>Составляем смету и программу праздника.</li>
-                <li>Организуем и проводим мероприятие.</li>
-                <li>Вы получаете море позитива и подарки от нас!</li>
-            </ol>
-            
-            <!-- ТАБЛИЦА ПОРТФОЛИО -->
-            <h2 id="portfolio">📸 Портфолио (примеры работ)</h2>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Мероприятие</th>
-                        <th>Фото</th>
-                        <th>Дата</th>
-                        <th>Количество гостей</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Свадьба Алексея и Марины</td>
-                        <td><img src="https://via.placeholder.com/80x60?text=Wedding" alt="Свадьба"></td>
-                        <td>15.06.2024</td>
-                        <td>80 чел.</td>
-                    </tr>
-                    <tr>
-                        <td>Детский праздник "В поисках сокровищ"</td>
-                        <td><img src="https://via.placeholder.com/80x60?text=Kids+Party" alt="Детский праздник"></td>
-                        <td>02.12.2024</td>
-                        <td>25 чел.</td>
-                    </tr>
-                    <tr>
-                        <td>Корпоратив "IT-Компания 2024"</td>
-                        <td><img src="https://via.placeholder.com/80x60?text=Corporate" alt="Корпоратив"></td>
-                        <td>28.01.2025</td>
-                        <td>120 чел.</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" style="background:#f9f9f9;">* Все фото реальных мероприятий (по запросу предоставим портфолио в полном объеме).</td>
-                    </tr>
-                </tfoot>
-            </table>
-            
-            <h3>Спецпредложение для именинников:</h3>
-            <pre>
-   СКИДКА 15% на аниматора 
-   при заказе кенди-бара!
-            </pre>
-            <p>Химическое шоу с <sub>жидким</sub> азотом и <sup>сухим</sup> льдом — ваш ребенок будет в восторге!</p>
+    <div class="container">
+        <h1>🎯 Лабораторная работа №5</h1>
+        <h2 style="text-align: center; color: #666; margin-bottom: 30px;">События и обработчики в JavaScript</h2>
+        
+        <!-- ЗАДАНИЯ 1-2: Кнопка с alert -->
+        <div class="section">
+            <h3>📌 Задания 1-2: Кнопка с сообщением</h3>
+            <button id="alertBtn">Нажми меня</button>
         </div>
         
-        <!-- ПРАВАЯ КОЛОНКА: акции, форма, цитаты -->
-        <div class="right-column">
-            <div class="promo">
-                <span>🔥 Акция!</span><br>
-                Закажи свадьбу до 1 мая и получи фотосессию в подарок.
+        <!-- ЗАДАНИЕ 3: Изменение заголовка -->
+        <div class="section">
+            <h3>✏️ Задание 3: Изменение заголовка</h3>
+            <h1 id="mainTitle" style="font-size: 24px;">Привет, мир!</h1>
+            <button id="changeTextBtn">Изменить заголовок</button>
+        </div>
+        
+        <!-- ЗАДАНИЕ 4: Изменение цвета фона -->
+        <div class="section">
+            <h3>🎨 Задание 4: Изменение цвета фона</h3>
+            <button id="changeColorBtn">Сменить цвет фона</button>
+        </div>
+        
+        <!-- ЗАДАНИЕ 5: Счётчик кликов -->
+        <div class="section">
+            <h3>🔢 Задание 5: Счётчик кликов</h3>
+            <div class="counter">
+                <h3>Счётчик кликов: <span id="counterValue">0</span></h3>
+                <button id="incrementBtn">+1</button>
+                <button id="resetBtn">Сброс</button>
             </div>
-            
-            <h3>🌟 Отзыв клиента:</h3>
-            <p><i>"Спасибо агентству ПраздникPRO! Организовали день рождения дочери просто сказочно. Все дети были в восторге от аниматоров!"</i><br>
-            <b>— Елена, мама Софии</b></p>
-            
-            <div class="subscribe">
-                <h3>📧 Подпишись на акции</h3>
-                <input type="email" id="emailInput" placeholder="Ваш e-mail">
-                <button onclick="subscribeUser()">Подписаться</button>
+        </div>
+        
+        <!-- ЗАДАНИЕ 6: Форма -->
+        <div class="section">
+            <h3>📝 Задание 6: Форма с отменой отправки</h3>
+            <form id="myForm">
+                <input type="text" id="userInput" placeholder="Введите что-нибудь...">
+                <button type="submit">Отправить</button>
+            </form>
+            <div class="result-info">
+                💡 Введённый текст появится в консоли (F12 → Console)
             </div>
-            
-            <!-- КНОПКА ДЛЯ КАЛЬКУЛЯТОРА (ЛАБА №4) -->
-            <button class="calculator-btn" onclick="runCalculator()">🧮 Калькулятор (Лаба №4)</button>
-            
-            <h3 id="faq">❓ Частые вопросы</h3>
-            <p><b>Выезжаете ли вы в другой город?</b><br> Да, работаем по всей области (оплата транспорта отдельно).</p>
-            <p><b>Есть ли договор?</b><br> Обязательно заключаем официальный договор с полной сметой.</p>
+        </div>
+        
+        <hr>
+        <div class="result-info">
+            ✅ Все обработчики событий активны!<br>
+            Откройте консоль (F12) для проверки работы формы.
         </div>
     </div>
     
-    <!-- ПОДВАЛ (футер) -->
-    <footer id="contacts">
-        <p>© 2025 Праздничное агентство «ПраздникPRO» | Все права защищены</p>
-        <p>📍 г. Москва, ул. Праздничная, д. 10 | ☎ +7 (495) 123-45-67 | ✉ <a href="mailto:info@prazdnikpro.ru">info@prazdnikpro.ru</a></p>
-        <p>
-            <a href="#">Главная</a> | 
-            <a href="#services">Услуги</a> | 
-            <a href="#portfolio">Портфолио</a> | 
-            <a href="#faq">Вопросы</a>
-        </p>
-        <p>
-            <small>Сайт разработан в рамках учебной лабораторной работы №1 + JavaScript (лабораторная №4)</small>
-        </p>
-    </footer>
-</div>
-
-<!-- ПОДКЛЮЧЕНИЕ JAVASCRIPT (ЛАБОРАТОРНАЯ РАБОТА №4) -->
-<script src="script.js"></script>
-
+    <!-- ПОДКЛЮЧЕНИЕ JAVASCRIPT -->
+    <script src="script.js"></script>
 </body>
 </html>
