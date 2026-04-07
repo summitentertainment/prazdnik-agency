@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная работа №5 - События JavaScript</title>
+    <title>Лабораторная №6 - Работа с DOM</title>
     <style>
         * {
             margin: 0;
@@ -14,12 +14,28 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f0f0;
+            color: #333;
             padding: 40px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Тёмная тема */
+        body.dark-theme {
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        body.dark-theme button {
+            background-color: #e94560;
+            color: white;
+        }
+        
+        body.dark-theme .section {
+            background-color: #16213e;
         }
         
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -27,10 +43,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
+        body.dark-theme .container {
+            background-color: #0f3460;
         }
         
         .section {
@@ -38,15 +52,16 @@
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 25px;
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid #e94560;
         }
         
         .section h3 {
             color: #2c3e50;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        }
+        
+        body.dark-theme .section h3 {
+            color: #e94560;
         }
         
         button {
@@ -62,109 +77,89 @@
         }
         
         button:hover {
-            background-color: #e74c3c;
+            background-color: #e94560;
             transform: scale(1.02);
         }
         
-        .counter {
-            text-align: center;
+        /* Класс для задания 5 */
+        .highlight {
+            background-color: yellow;
+            border: 2px solid orange;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
         }
         
-        .counter h3 {
-            font-size: 24px;
+        body.dark-theme .highlight {
+            background-color: #e94560;
+            border-color: #ff6b6b;
+            color: white;
+        }
+        
+        #myBlock, #coloredBlock {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        body.dark-theme #myBlock,
+        body.dark-theme #coloredBlock {
+            background-color: #1a1a2e;
+            border: 1px solid #e94560;
+        }
+        
+        h1 {
+            color: #2c3e50;
             margin-bottom: 15px;
         }
         
-        .counter span {
-            color: #e74c3c;
-            font-size: 32px;
-        }
-        
-        input {
-            padding: 10px;
-            width: 70%;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-right: 10px;
-        }
-        
-        form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .result-info {
-            margin-top: 20px;
-            padding: 15px;
-            background: #ecf0f1;
-            border-radius: 10px;
-            text-align: center;
-            font-family: monospace;
-        }
-        
-        hr {
-            margin: 20px 0;
-            border: none;
-            height: 1px;
-            background: #ddd;
+        body.dark-theme h1 {
+            color: #e94560;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎯 Лабораторная работа №5</h1>
-        <h2 style="text-align: center; color: #666; margin-bottom: 30px;">События и обработчики в JavaScript</h2>
+        <h1>Лабораторная работа №6</h1>
+        <h2 style="text-align: center; margin-bottom: 30px;">Работа с DOM в JavaScript</h2>
         
-        <!-- ЗАДАНИЯ 1-2: Кнопка с alert -->
+        <!-- ЗАДАНИЕ 2: Изменение заголовка -->
         <div class="section">
-            <h3>📌 Задания 1-2: Кнопка с сообщением</h3>
-            <button id="alertBtn">Нажми меня</button>
+            <h3>Задание 2: Изменение заголовка</h3>
+            <h1 id="mainTitle">Привет, мир!</h1>
+            <button id="changeTitleBtn">Изменить заголовок</button>
         </div>
         
-        <!-- ЗАДАНИЕ 3: Изменение заголовка -->
+        <!-- ЗАДАНИЕ 3: Изменение цвета абзаца -->
         <div class="section">
-            <h3>✏️ Задание 3: Изменение заголовка</h3>
-            <h1 id="mainTitle" style="font-size: 24px;">Привет, мир!</h1>
-            <button id="changeTextBtn">Изменить заголовок</button>
+            <h3>Задание 3: Изменение цвета абзаца</h3>
+            <p id="mainParagraph">Это обычный текст абзаца.</p>
+            <button id="changeParagraphColorBtn">Изменить цвет абзаца</button>
         </div>
         
-        <!-- ЗАДАНИЕ 4: Изменение цвета фона -->
+        <!-- ЗАДАНИЕ 4: Скрыть/Показать текст -->
         <div class="section">
-            <h3>🎨 Задание 4: Изменение цвета фона</h3>
-            <button id="changeColorBtn">Сменить цвет фона</button>
+            <h3>Задание 4: Скрыть и показать текст</h3>
+            <div id="myBlock">Это блок, который можно скрыть и показать.</div>
+            <button id="hideBtn">Скрыть текст</button>
+            <button id="showBtn">Показать текст</button>
         </div>
         
-        <!-- ЗАДАНИЕ 5: Счётчик кликов -->
+        <!-- ЗАДАНИЕ 5: Добавление класса -->
         <div class="section">
-            <h3>🔢 Задание 5: Счётчик кликов</h3>
-            <div class="counter">
-                <h3>Счётчик кликов: <span id="counterValue">0</span></h3>
-                <button id="incrementBtn">+1</button>
-                <button id="resetBtn">Сброс</button>
-            </div>
+            <h3>Задание 5: Добавление класса к элементу</h3>
+            <div id="coloredBlock">Этот блок получит новый класс.</div>
+            <button id="addClassBtn">Добавить класс</button>
         </div>
         
-        <!-- ЗАДАНИЕ 6: Форма -->
+        <!-- ЗАДАНИЕ 6: Переключатель темы -->
         <div class="section">
-            <h3>📝 Задание 6: Форма с отменой отправки</h3>
-            <form id="myForm">
-                <input type="text" id="userInput" placeholder="Введите что-нибудь...">
-                <button type="submit">Отправить</button>
-            </form>
-            <div class="result-info">
-                💡 Введённый текст появится в консоли (F12 → Console)
-            </div>
-        </div>
-        
-        <hr>
-        <div class="result-info">
-            ✅ Все обработчики событий активны!<br>
-            Откройте консоль (F12) для проверки работы формы.
+            <h3>Задание 6: Переключатель темы</h3>
+            <button id="themeToggleBtn">Тёмная тема</button>
         </div>
     </div>
     
-    <!-- ПОДКЛЮЧЕНИЕ JAVASCRIPT -->
     <script src="script.js"></script>
 </body>
 </html>
