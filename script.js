@@ -1,65 +1,71 @@
 // ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №6
-// Работа с DOM в JavaScript
+// ЛАБОРАТОРНАЯ РАБОТА №7
+// Работа с формами и валидация данных
 // ============================================
 
-// ========== ЗАДАНИЕ 2 ==========
-let title = document.querySelector("#mainTitle");
-let changeTitleBtn = document.getElementById("changeTitleBtn");
+let form = document.getElementById("registrationForm");
+let successMessage = document.getElementById("successMessage");
 
-if (changeTitleBtn && title) {
-    changeTitleBtn.onclick = function() {
-        title.textContent = "Новый заголовок";
-    };
-}
-
-// ========== ЗАДАНИЕ 3 ==========
-let paragraph = document.querySelector("#mainParagraph");
-let changeParagraphColorBtn = document.getElementById("changeParagraphColorBtn");
-
-if (changeParagraphColorBtn && paragraph) {
-    changeParagraphColorBtn.onclick = function() {
-        paragraph.style.color = "#e94560";
-        paragraph.style.fontWeight = "bold";
-    };
-}
-
-// ========== ЗАДАНИЕ 4 ==========
-let myBlock = document.querySelector("#myBlock");
-let hideBtn = document.getElementById("hideBtn");
-let showBtn = document.getElementById("showBtn");
-
-if (hideBtn && showBtn && myBlock) {
-    hideBtn.onclick = function() {
-        myBlock.style.display = "none";
-    };
+form.addEventListener("submit", function(event) {
+    // Задание 2: Отменяем стандартную отправку формы
+    event.preventDefault();
     
-    showBtn.onclick = function() {
-        myBlock.style.display = "block";
-    };
-}
-
-// ========== ЗАДАНИЕ 5 ==========
-let coloredBlock = document.querySelector("#coloredBlock");
-let addClassBtn = document.getElementById("addClassBtn");
-
-if (addClassBtn && coloredBlock) {
-    addClassBtn.onclick = function() {
-        coloredBlock.classList.add("highlight");
-    };
-}
-
-// ========== ЗАДАНИЕ 6 ==========
-let themeToggleBtn = document.getElementById("themeToggleBtn");
-
-if (themeToggleBtn) {
-    themeToggleBtn.onclick = function() {
-        document.body.classList.toggle("dark-theme");
+    // Задание 2: Получаем значения всех полей
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    
+    // Убираем лишние пробелы
+    name = name.trim();
+    email = email.trim();
+    password = password.trim();
+    
+    // Получаем элементы для вывода ошибок
+    let nameError = document.getElementById("nameError");
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
+    
+    // Очищаем старые сообщения об ошибках
+    nameError.textContent = "";
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    successMessage.textContent = "";
+    
+    let isValid = true;
+    
+    // Задание 3 и 4: Проверка имени (не менее 3 символов)
+    if (name === "") {
+        nameError.textContent = "Имя обязательно для заполнения";
+        isValid = false;
+    } else if (name.length < 3) {
+        nameError.textContent = "Имя должно содержать не менее 3 символов";
+        isValid = false;
+    }
+    
+    // Задание 3 и 4: Проверка email (содержит @)
+    if (email === "") {
+        emailError.textContent = "Email обязателен для заполнения";
+        isValid = false;
+    } else if (!email.includes("@")) {
+        emailError.textContent = "Введите корректный email (с символом @)";
+        isValid = false;
+    }
+    
+    // Задание 3 и 4: Проверка пароля (не менее 6 символов)
+    if (password === "") {
+        passwordError.textContent = "Пароль обязателен для заполнения";
+        isValid = false;
+    } else if (password.length < 6) {
+        passwordError.textContent = "Пароль должен содержать не менее 6 символов";
+        isValid = false;
+    }
+    
+    // Задание 5 и 6: Если все данные корректны
+    if (isValid) {
+        successMessage.textContent = "Регистрация успешна!";
+        successMessage.className = "success";
         
-        if (document.body.classList.contains("dark-theme")) {
-            themeToggleBtn.textContent = "Светлая тема";
-        } else {
-            themeToggleBtn.textContent = "Тёмная тема";
-        }
-    };
-}
+        // Задание 6: Очищаем форму после успешной проверки
+        form.reset();
+    }
+});
