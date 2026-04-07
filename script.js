@@ -1,102 +1,65 @@
 // ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №5
-// События и обработчики событий в JavaScript
+// ЛАБОРАТОРНАЯ РАБОТА №6
+// Работа с DOM в JavaScript
 // ============================================
 
-console.log("=========================================");
-console.log("Лабораторная работа №5");
-console.log("События и обработчики событий");
-console.log("=========================================");
+// ========== ЗАДАНИЕ 2 ==========
+let title = document.querySelector("#mainTitle");
+let changeTitleBtn = document.getElementById("changeTitleBtn");
 
-// ========== ЗАДАНИЯ 1-2 ==========
-// Кнопка «Нажми меня» с выводом alert
-
-let alertButton = document.getElementById("alertBtn");
-if (alertButton) {
-    alertButton.onclick = function() {
-        alert("Привет! Вы нажали на кнопку!");
-        console.log("Задания 1-2: Нажата кнопка с alert");
+if (changeTitleBtn && title) {
+    changeTitleBtn.onclick = function() {
+        title.textContent = "Новый заголовок";
     };
 }
 
 // ========== ЗАДАНИЕ 3 ==========
-// Изменение текста заголовка h1
+let paragraph = document.querySelector("#mainParagraph");
+let changeParagraphColorBtn = document.getElementById("changeParagraphColorBtn");
 
-let title = document.getElementById("mainTitle");
-let changeTextBtn = document.getElementById("changeTextBtn");
-
-if (changeTextBtn && title) {
-    changeTextBtn.onclick = function() {
-        title.textContent = "Новый заголовок! Текст изменён!";
-        console.log("Задание 3: Заголовок изменён на:", title.textContent);
+if (changeParagraphColorBtn && paragraph) {
+    changeParagraphColorBtn.onclick = function() {
+        paragraph.style.color = "#e94560";
+        paragraph.style.fontWeight = "bold";
     };
 }
 
 // ========== ЗАДАНИЕ 4 ==========
-// Изменение цвета фона страницы
+let myBlock = document.querySelector("#myBlock");
+let hideBtn = document.getElementById("hideBtn");
+let showBtn = document.getElementById("showBtn");
 
-let changeColorBtn = document.getElementById("changeColorBtn");
-
-if (changeColorBtn) {
-    changeColorBtn.onclick = function() {
-        let colors = ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4", "#ffeaa7", "#dfe6e9", "#e74c3c", "#3498db"];
-        let randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = randomColor;
-        console.log("Задание 4: Цвет фона изменён на", randomColor);
+if (hideBtn && showBtn && myBlock) {
+    hideBtn.onclick = function() {
+        myBlock.style.display = "none";
+    };
+    
+    showBtn.onclick = function() {
+        myBlock.style.display = "block";
     };
 }
 
 // ========== ЗАДАНИЕ 5 ==========
-// Счётчик кликов
+let coloredBlock = document.querySelector("#coloredBlock");
+let addClassBtn = document.getElementById("addClassBtn");
 
-let count = 0;
-let counterValue = document.getElementById("counterValue");
-let incrementBtn = document.getElementById("incrementBtn");
-let resetBtn = document.getElementById("resetBtn");
-
-if (incrementBtn && resetBtn && counterValue) {
-    incrementBtn.onclick = function() {
-        count++;
-        counterValue.textContent = count;
-        console.log("Задание 5: Счётчик =", count);
-    };
-    
-    resetBtn.onclick = function() {
-        count = 0;
-        counterValue.textContent = count;
-        console.log("Задание 5: Счётчик сброшен на 0");
+if (addClassBtn && coloredBlock) {
+    addClassBtn.onclick = function() {
+        coloredBlock.classList.add("highlight");
     };
 }
 
 // ========== ЗАДАНИЕ 6 ==========
-// Форма с отменой отправки и выводом в консоль
+let themeToggleBtn = document.getElementById("themeToggleBtn");
 
-let form = document.getElementById("myForm");
-
-if (form) {
-    form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Отменяем стандартную перезагрузку страницы
+if (themeToggleBtn) {
+    themeToggleBtn.onclick = function() {
+        document.body.classList.toggle("dark-theme");
         
-        let inputField = document.getElementById("userInput");
-        let userText = inputField.value;
-        
-        if (userText === "") {
-            console.log("Задание 6: Пользователь отправил пустую форму");
-            alert("Пожалуйста, введите текст!");
+        if (document.body.classList.contains("dark-theme")) {
+            themeToggleBtn.textContent = "Светлая тема";
         } else {
-            console.log("Задание 6: Введённый текст —", userText);
-            alert("Текст отправлен! Смотрите консоль (F12)");
-            inputField.value = ""; // Очищаем поле
+            themeToggleBtn.textContent = "Тёмная тема";
         }
-    });
+    };
 }
-
-console.log("=========================================");
-console.log("✅ Все обработчики событий загружены!");
-console.log("📌 Попробуйте:");
-console.log("   - Нажать кнопки");
-console.log("   - Изменить заголовок");
-console.log("   - Сменить цвет фона");
-console.log("   - Поработать со счётчиком");
-console.log("   - Отправить форму");
-console.log("=========================================");
